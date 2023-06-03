@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import logo from "./images/logo.png"
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -20,7 +21,7 @@ function Header() {
               <span className="sr-only">Your Company</span>
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src={logo}
                 alt=""
               />
             </a>

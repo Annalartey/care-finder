@@ -1,4 +1,4 @@
-import healthcare1 from "./images/healthcare1.jpeg"
+import healthcare1 from "./images/health1.jpeg"
 export default function Home() {
 
   return (
