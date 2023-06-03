@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from "./images/logo.png"
 
 const footerNavigation = {
   solutions: [
@@ -103,8 +104,8 @@ function Footer() {
             <div className="space-y-8">
               <img
                 className="h-7"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                alt="Company name"
+                src={logo}
+                alt="Carefinder logo"
               />
               <p className="text-sm leading-6 text-gray-300">
                 Est error fuga modi error. Laborum eum nobis porro cupiditate et quo.
