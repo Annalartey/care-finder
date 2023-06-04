@@ -1,20 +1,16 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import About from './component/About';
-import Faqs from './component/Faqs';
-import Footer from './component/Footer';
-import Header from './component/Header';
-import Home from './component/Home';
-import WhyUs from './component/WhyUs';
+import LandingPage from './component/LandingPage';
+import SignIn from './component/SignIn'
+
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Home/>
-      <About/>
-      <WhyUs/>
-      <Faqs/>
-      <Footer/>
+      <Routes>
+        <Route path="/" element = { <LandingPage/> } />
+        <Route path='signin' element = { <SignIn/> } />
+      </Routes>
     </div>
   );
 }

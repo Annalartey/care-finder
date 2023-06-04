@@ -30,16 +30,8 @@
 
 /* Home */
 .home{
-  background-image: url("./component/images/healthcare1.jpeg");
-  background-color: black;
   width: 100vw;
   height: 100vh;
-  background-attachment: fixed;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
 }
 
 /* About */

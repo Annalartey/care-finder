@@ -103,7 +103,7 @@ function Footer() {
           <div className="xl:grid xl:grid-cols-3 xl:gap-8">
             <div className="space-y-8">
               <img
-                className="h-7"
+                className="h-16 lg:h-20"
                 src={logo}
                 alt="Carefinder logo"
               />

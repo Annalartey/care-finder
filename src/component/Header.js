@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "./images/logo.png"
+import { Link } from 'react-router-dom'
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -15,12 +16,12 @@ function Header() {
   return (
     <div>
       <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 pt-0 lg:px-8" aria-label="Global">
+        <nav className="flex items-center justify-between p-6 py-0 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <a href="/#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
-                className="h-18 w-auto lg:h-20"
+                className="h-14 w-auto lg:h-20"
                 src={logo}
                 alt=""
               />
@@ -44,9 +45,9 @@ function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="/#" className="text-sm font-semibold leading-6 text-white">
+            <Link to="signin" className="text-sm font-semibold leading-6 text-white">
               Log in <span aria-hidden="true">&rarr;</span>
-            </a>
+            </Link>
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -56,7 +57,7 @@ function Header() {
               <a href="/#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 <img
-                  className="h-18 w-auto lg:h-20"
+                  className="h-14 w-auto lg:h-20"
                   src={logo}
                   alt=""
                 />

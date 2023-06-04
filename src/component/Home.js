@@ -2,12 +2,12 @@ import healthcare1 from "./images/health1.jpeg"
 export default function Home() {
 
   return (
-    <div className="bg-gray-900 w-full">
-      <div className="relative isolate overflow-hidden pt-14">
+    <div className="bg-gray-900">
+      <div className="home relative isolate overflow-hidden pt-14">
         <img
           src={healthcare1}
           alt=""
-          className="absolute inset-0 -z-10 h-full w-full object-cover"
+          className="home absolute inset-0 -z-10 h-full w-full object-cover"
         />
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -41,7 +41,7 @@ export default function Home() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
                 href="/#"
-                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+                className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
               >
                 Find One Now
               </a>
