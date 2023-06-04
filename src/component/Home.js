@@ -2,12 +2,12 @@ import healthcare1 from "./images/health1.jpeg"
 export default function Home() {
 
   return (
-    <div className="bg-gray-900">
-      <div className="home relative isolate overflow-hidden pt-14">
+    <div id="home" className="bg-gray-900">
+      <div className="full-h-w-css relative isolate overflow-hidden pt-14">
         <img
           src={healthcare1}
           alt=""
-          className="home absolute inset-0 -z-10 h-full w-full object-cover"
+          className="full-h-w-css absolute inset-0 -z-10 h-full w-full object-cover"
         />
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
