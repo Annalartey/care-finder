@@ -235,12 +235,12 @@ function HospitalSearch() {
 
 
  <div className="lg:mx-40 flex flex-col md:flex-row flex-wrap">
-          {projects.map((project, projectIndex) => {
+          {hospitals.map((hospital, id) => {
             return (
               <a
-                key={projectIndex}
+                key={hospital.id}
                 className="w-full md:w-1/2 lg:w-1/3 text-center md:text-left py-6"
-                href={project.link || ""}
+                href={hospital.data.website || ""}
                 target="__blank"
                 rel="noreferrer"
                 data-aos="fade-right"
@@ -248,16 +248,16 @@ function HospitalSearch() {
               >
                 <div className="rounded shadow-lg w-80 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 ">
                 <div
-                  style={{ backgroundImage: `url(${project.image})` }}
+                  style={{ backgroundImage: `url(${hospital.image})` }}
                   className="bg-center bg-cover shadow-sm w-80 h-72 mx-auto md:mr-auto md:ml-o md:mx-0 "
                 ></div>
 
                 <div className="text-center">
                   <h1 className="font-bold text-xl mt-4 mb-4 text-gray-900">
-                    {project.title}
+                    {hospital.data.name}
                   </h1>
                   <p className="text-xl text-gray-900">
-                    {project.info}
+                    {hospital.data.open}
                   </p>
                 </div>
                 </div>
@@ -265,15 +265,6 @@ function HospitalSearch() {
             );
           })}
         </div>
-    
-
-
-
-          <div>
-            {hospitals.map(hospital => (
-              <p key={hospital.id}>{hospital.data.name}</p>
-            ))}
-          </div>
 
 
 </div>
