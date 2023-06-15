@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -8,7 +9,7 @@ const navigation = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Why Carefinder', href: '#why-us' },
-  { name: 'Hospitals', href: '/' },
+  { name: 'Hospitals', href: "/hospital-search" },
   { name: 'FAQs', href: '#faqs' },
 ]
 

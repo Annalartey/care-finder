@@ -1,4 +1,6 @@
+import * as React from 'react';
 import healthcare1 from "./images/health1.jpeg"
+import { Link } from 'react-router-dom';
 export default function Home() {
 
   return (
@@ -39,15 +41,14 @@ export default function Home() {
               Get easy and fast access to locations of hospitals all around Ghana. Your health is our greatest concern.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="/#"
+              <Link to ="/signup"
                 className="rounded-md bg-blue-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
               >
-                Find One Now
-              </a>
-              <a href="/#" className="text-sm font-semibold leading-6 text-white">
-                Learn more <span aria-hidden="true">→</span>
-              </a>
+                Get Started
+              </Link>
+              <Link to = "/hospital-search" className="text-sm font-semibold leading-6 text-white">
+                Find a Hospital Now <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         </div>
