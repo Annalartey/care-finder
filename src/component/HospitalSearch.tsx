@@ -11,7 +11,6 @@ import {
   TrashIcon,
   UserPlusIcon,
 } from '@heroicons/react/20/solid'
-import health1 from '../component/images/health1.jpeg'
 import {collection, getDocs} from 'firebase/firestore'
 import {db} from "../lib/init-firebase"
 
@@ -20,8 +19,37 @@ function classNames(...classes:any) {
 }
 
 function HospitalSearch() {
-  const [hospitals, setHospitals] = useState<any[]>([])
+  const [hospitals, setHospitals] = useState <any[]> ([])
+  const [searchInput, setSearchInput] = useState <string> ("")
 
+  const handleChange = (e:any) => {
+    e.preventDefault();
+    setSearchInput(e.target.value)
+  };
+
+  const handleClick = (e:any) => {
+    e.preventDefault();
+    if (searchInput.length > 0){
+      console.log(searchInput)
+    }
+
+    const hospitalCollectionRef = collection(db, 'hospitals')
+    getDocs(hospitalCollectionRef)
+      .then(response => {
+        const hosp: any = response.docs.map(doc => ({
+          data: doc.data(),
+          id: doc.id
+        }))
+        const result = hosp.filter((hosp:any) => {
+          return hosp.data.region === searchInput;
+        });
+        console.log(result)
+        setHospitals(result)
+      })
+      .catch(error => console.log(error.message))
+      
+  };
+  
   useEffect(() => {
     getHospitals()
   }, [])
@@ -29,6 +57,8 @@ function HospitalSearch() {
   useEffect(() => {
     console.log(hospitals)
   }, [hospitals])
+
+
 
   function getHospitals() {
     const hospitalCollectionRef = collection(db, 'hospitals')
@@ -42,27 +72,6 @@ function HospitalSearch() {
       })
       .catch(error => console.log(error.message))
   }
-
-  let projects = [
-    {
-      title: "Calculator",
-      info: "A simple calculator made with vanilla JS, HTML/CSS",
-      link: "https://a-calculator-for-you.netlify.app/",
-      image: health1,
-    },
-    {
-      title: "Task Tracker",
-      info: "An app that helps you track your tasks for the day.",
-      link: "https://trasker.netlify.app/",
-      image: health1,
-    },
-    {
-      title: "Stopwatch",
-      info: "A simple stopwatch built with vanilla JS, HTML/CSS",
-      link: "https://a-stopwatch.netlify.app/",
-      image: health1,
-    },
-  ];
 
 
   return (
@@ -216,8 +225,8 @@ function HospitalSearch() {
 
 
         <div className="relative w-full">
-            <input type="search" id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates..." required/>
-            <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <input type="search" onChange={handleChange} id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Hospitals..." required/>
+            <button type="submit" onClick={handleClick} className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span className="sr-only">Search</span>
             </button>
@@ -257,7 +266,7 @@ function HospitalSearch() {
                     {hospital.data.name}
                   </h1>
                   <p className="text-xl text-gray-900">
-                    {hospital.data.open}
+                    Opens {hospital.data.openTime}
                   </p>
                 </div>
                 </div>
