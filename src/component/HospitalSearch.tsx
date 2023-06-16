@@ -2,17 +2,11 @@ import * as React from 'react';
 import { Fragment, useState, useEffect } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {
-  ArchiveBoxIcon,
-  ArrowRightCircleIcon,
   ChevronDownIcon,
-  DocumentDuplicateIcon,
-  HeartIcon,
-  PencilSquareIcon,
-  TrashIcon,
-  UserPlusIcon,
 } from '@heroicons/react/20/solid'
 import {collection, getDocs} from 'firebase/firestore'
 import {db} from "../lib/init-firebase"
+import { Link } from 'react-router-dom';
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -21,32 +15,30 @@ function classNames(...classes:any) {
 function HospitalSearch() {
   const [hospitals, setHospitals] = useState <any[]> ([])
   const [searchInput, setSearchInput] = useState <string> ("")
+  const [searchInputReg, setSearchInputReg] = useState <string> ("")
+  // const [menuValue, setMenuValue] = useState <string> ("")
 
   const handleChange = (e:any) => {
     e.preventDefault();
     setSearchInput(e.target.value)
   };
 
+  const handleMenuChange = (e:any) => {
+    e.preventDefault()
+      setSearchInputReg(e.target.value)
+      searchHospitalsRegion();
+      
+  }
+
   const handleClick = (e:any) => {
     e.preventDefault();
     if (searchInput.length > 0){
       console.log(searchInput)
+      searchHospitalsTown();
+      setSearchInput("")
+    } else{
+      alert("please input a town found in a region in Ghana")
     }
-
-    const hospitalCollectionRef = collection(db, 'hospitals')
-    getDocs(hospitalCollectionRef)
-      .then(response => {
-        const hosp: any = response.docs.map(doc => ({
-          data: doc.data(),
-          id: doc.id
-        }))
-        const result = hosp.filter((hosp:any) => {
-          return hosp.data.region === searchInput;
-        });
-        console.log(result)
-        setHospitals(result)
-      })
-      .catch(error => console.log(error.message))
       
   };
   
@@ -59,6 +51,39 @@ function HospitalSearch() {
   }, [hospitals])
 
 
+  function searchHospitalsTown() {
+    const hospitalCollectionRef = collection(db, 'hospitals')
+    getDocs(hospitalCollectionRef)
+    .then(response => {
+      const hosp: any = response.docs.map(doc => ({
+        data: doc.data(),
+        id: doc.id
+      }))
+      const result = hosp.filter((hosp:any) => {
+        return hosp.data.location.toLowerCase() === searchInput.toLowerCase(); 
+      });
+      console.log(result)
+      setHospitals(result)
+    })
+    .catch(error => console.log(error.message))
+  }
+
+  function searchHospitalsRegion() {
+    const hospitalCollectionRef = collection(db, 'hospitals')
+    getDocs(hospitalCollectionRef)
+    .then(response => {
+      const hosp: any = response.docs.map(doc => ({
+        data: doc.data(),
+        id: doc.id
+      }))
+      const result = hosp.filter((hosp:any) => {
+        return hosp.data.region.toLowerCase() === searchInputReg.toLowerCase(); 
+      });
+      console.log(result)
+      setHospitals(result)
+    })
+    .catch(error => console.log(error.message))
+  }
 
   function getHospitals() {
     const hospitalCollectionRef = collection(db, 'hospitals')
@@ -78,6 +103,7 @@ function HospitalSearch() {
    <div>
       
 <form>
+  <Link to = "/" ><button>back</button></Link>
     <div className="flex">
 
         <Menu as="div" className="relative inline-block text-left">
@@ -100,118 +126,34 @@ function HospitalSearch() {
         <Menu.Items className="absolute left-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/#"
+              {({ active  }) => (
+                <button
+                  onClick={handleMenuChange}
+                  value="greater accra"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'group flex items-center px-4 py-2 text-sm'
                   )}
                 >
-                  <PencilSquareIcon
-                    className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
                   Greater Accra
-                </a>
+                </button>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="/#"
+                <button
+                onClick={handleMenuChange}
+                  value="eastern region"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'group flex items-center px-4 py-2 text-sm'
                   )}
                 >
-                  <DocumentDuplicateIcon
-                    className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
-                  UpperWest
-                </a>
+                  Eastern Region
+                </button>
               )}
             </Menu.Item>
-          </div>
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <ArchiveBoxIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Northern
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <ArrowRightCircleIcon
-                    className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
-                  Move
-                </a>
-              )}
-            </Menu.Item>
-          </div>
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <UserPlusIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Share
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <HeartIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Add to favorites
-                </a>
-              )}
-            </Menu.Item>
-          </div>
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <TrashIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Delete
-                </a>
-              )}
-            </Menu.Item>
+            
           </div>
         </Menu.Items>
       </Transition>
@@ -225,7 +167,7 @@ function HospitalSearch() {
 
 
         <div className="relative w-full">
-            <input type="search" onChange={handleChange} id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Hospitals..." required/>
+            <input type="search" value={searchInput} onChange={handleChange} id="search-dropdown" className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Hospitals in specific towns..." required/>
             <button type="submit" onClick={handleClick} className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span className="sr-only">Search</span>
