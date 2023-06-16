@@ -107,9 +107,6 @@ function Footer() {
                 src={logo}
                 alt="Carefinder logo"
               />
-              <p className="text-sm leading-6 text-gray-300">
-                Est error fuga modi error. Laborum eum nobis porro cupiditate et quo.
-              </p>
               <div className="flex space-x-6">
                 {footerNavigation.social.map((item) => (
                   <a key={item.name} href={item.href} className="text-gray-500 hover:text-gray-400">
@@ -122,11 +119,11 @@ function Footer() {
             <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
-                  <h3 className="text-sm font-semibold leading-6 text-white">Solutions</h3>
+                  <h3 className="text-sm font-semibold leading-6 text-gray-500">Solutions</h3>
                   <ul className="mt-6 space-y-4">
                     {footerNavigation.solutions.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm leading-6 text-gray-300 hover:text-white">
+                        <a href={item.href} className="text-sm leading-6 text-black hover:text-gray-500">
                           {item.name}
                         </a>
                       </li>
@@ -134,11 +131,11 @@ function Footer() {
                   </ul>
                 </div>
                 <div className="mt-10 md:mt-0">
-                  <h3 className="text-sm font-semibold leading-6 text-white">Support</h3>
+                  <h3 className="text-sm font-semibold leading-6 text-gray-500">Support</h3>
                   <ul className="mt-6 space-y-4">
                     {footerNavigation.support.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm leading-6 text-gray-300 hover:text-white">
+                        <a href={item.href} className="text-sm leading-6 text-black hover:text-gray-500">
                           {item.name}
                         </a>
                       </li>
@@ -148,11 +145,11 @@ function Footer() {
               </div>
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
-                  <h3 className="text-sm font-semibold leading-6 text-white">Company</h3>
+                  <h3 className="text-sm font-semibold leading-6 text-gray-500">Company</h3>
                   <ul className="mt-6 space-y-4">
                     {footerNavigation.company.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm leading-6 text-gray-300 hover:text-white">
+                        <a href={item.href} className="text-sm leading-6 text-black hover:text-gray-500">
                           {item.name}
                         </a>
                       </li>
@@ -160,11 +157,11 @@ function Footer() {
                   </ul>
                 </div>
                 <div className="mt-10 md:mt-0">
-                  <h3 className="text-sm font-semibold leading-6 text-white">Legal</h3>
+                  <h3 className="text-sm font-semibold leading-6 text-gray-500">Legal</h3>
                   <ul className="mt-6 space-y-4">
                     {footerNavigation.legal.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm leading-6 text-gray-300 hover:text-white">
+                        <a href={item.href} className="text-sm leading-6 text-black hover:text-gray-500">
                           {item.name}
                         </a>
                       </li>

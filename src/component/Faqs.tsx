@@ -4,9 +4,14 @@ import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 
 const faqs = [
   {
-    question: "What's the best thing about Switzerland?",
+    question: "Is health care in Ghana free?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "No, but National Health Insurance (NHIS) is available for every Ghanaian.",
+  },
+  {
+    question: "Can I have access to any hospital in Ghana?",
+    answer:
+      "Yes, you can have access to any hospital in Ghana.",
   },
   // More questions...
 ]

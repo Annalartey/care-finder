@@ -3,10 +3,10 @@ import React from 'react'
 function WhyUs() {
   return (
     <div>
-       <div id='why-us' className="mx-auto mt-32 max-w-7xl sm:mt-40 sm:px-6 lg:px-8">
+       <div id='why-us' className="mx-auto max-w-7xl mt-20 lg:mt-0 sm:px-6 lg:px-8">
           <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">
             <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Our customers love us
+              Why Carefinder? ...Our users love us
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
               Aliquip reprehenderit incididunt amet quis fugiat ut velit. Sit occaecat labore proident cillum in nisi
@@ -66,14 +66,14 @@ function WhyUs() {
           <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
               <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our people</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Vision</h2>
                 <p className="mt-6 text-xl leading-8 text-gray-600">
-                  Quasi est quaerat. Sit molestiae et. Provident ad dolorem occaecati eos iste. Soluta rerum quidem
-                  minus ut molestiae velit error quod. Excepturi quidem expedita molestias quas.
+                  We are concerned about the health of all Ghanaians. It is our mission to provide access to informations about hospitals to every Ghanaian regardless of your age and status.
+                  It is our vission to be able to give our users the opportunity to book and reserve appointments with doctors in and out of their region in the next two years.
                 </p>
                 <p className="mt-6 text-base leading-7 text-gray-600">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                  amet fugiat veniam occaecat fugiat. Quasi aperiam sit non sit neque reprehenderit.
+                  Our goal is to be the best at what we do: linking our users to the best healthcare services available in and out of their region.
+                  At carefinder, your health is our priority. 
                 </p>
               </div>
               <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
@@ -114,9 +114,9 @@ function WhyUs() {
 
         {/* Stats */}
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0">
+          <div className="mx-auto text-center relative max-w-2xl">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              We approach the workplace as something that adds to our lives and adds value to world.
+              We approach good health as something that is the basis for success and enables us add value to world.
             </h2>
             <p className="mt-6 text-base leading-7 text-gray-600">
               Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu.
@@ -125,32 +125,33 @@ function WhyUs() {
           </div>
           <div className="mx-auto mt-16 flex max-w-2xl flex-col gap-8 lg:mx-0 lg:mt-20 lg:max-w-none lg:flex-row lg:items-end">
             <div className="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-gray-50 p-8 sm:w-3/4 sm:max-w-md sm:flex-row-reverse sm:items-end lg:w-72 lg:max-w-none lg:flex-none lg:flex-col lg:items-start">
-              <p className="flex-none text-3xl font-bold tracking-tight text-gray-900">250k</p>
+              <p className="flex-none text-3xl font-bold tracking-tight text-gray-900 text-center">250k</p>
               <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
                 <p className="text-lg font-semibold tracking-tight text-gray-900">Users on the platform</p>
                 <p className="mt-2 text-base leading-7 text-gray-600">
-                  Vel labore deleniti veniam consequuntur sunt nobis.
+                  We envision that we would have reached out to many Ghanaians in different regions.
                 </p>
               </div>
             </div>
             <div className="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-gray-900 p-8 sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-sm lg:flex-auto lg:flex-col lg:items-start lg:gap-y-44">
-              <p className="flex-none text-3xl font-bold tracking-tight text-white">$8.9 billion</p>
+              <p className="flex-none text-3xl font-bold tracking-tight text-white text-center">500 hospitals</p>
               <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
                 <p className="text-lg font-semibold tracking-tight text-white">
-                  We’re proud that our customers have made over $8 billion in total revenue.
+                  We’re looking foward to providing access to about 500 hospitals throughout all regions in Ghana.
                 </p>
                 <p className="mt-2 text-base leading-7 text-gray-400">
-                  Eu duis porta aliquam ornare. Elementum eget magna egestas.
+                  Making it easy to find hospitals where ever you are.
                 </p>
               </div>
             </div>
-            <div className="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-indigo-600 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-28">
-              <p className="flex-none text-3xl font-bold tracking-tight text-white">401,093</p>
+            <div className="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-blue-600 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-28">
+              <p className="flex-none text-3xl font-bold tracking-tight text-white text-center">400,000</p>
               <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
-                <p className="text-lg font-semibold tracking-tight text-white">Transactions this year</p>
+                <p className="text-lg font-semibold tracking-tight text-white">Bookings in the next 4 years</p>
                 <p className="mt-2 text-base leading-7 text-indigo-200">
-                  Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu duis porta aliquam ornare.
+                  It'll be our uttermost pleasure to help you book appointment with doctors before hand.
                 </p>
+                <p className="text-sm font-semibold leading-6 text-gray-100">coming soon...</p>
               </div>
             </div>
           </div>
