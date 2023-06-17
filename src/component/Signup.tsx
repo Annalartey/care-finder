@@ -2,7 +2,7 @@ import * as React from 'react';
 import {  useState} from "react";
 import { Link } from "react-router-dom"
 import logo from "./images/logo.png"
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, } from 'firebase/auth';
 import { auth } from '../lib/init-firebase'
 
 
@@ -13,17 +13,23 @@ export default function Example() {
   const [password, setPassword] = useState<string> ("")
   const [user, setUser] = useState<any> ({})
 
+  onAuthStateChanged (auth, (currentUser) => {
+    setUser(currentUser);
+  })
 
-  const signup = (e: any) => {
+
+  const signup = async (e: any) => {
     e.preventDefault();
-   createUserWithEmailAndPassword(auth, email, password)
-   .then((userCredential) => {
-    setUser(userCredential.user)
-    console.log(user)
-   })
-   .catch((error) => {
-    console.log(error)
-   })
+    try {
+      const user = await createUserWithEmailAndPassword (
+        auth,
+        email,
+        password
+      );
+      console.log(user);
+    } catch (error: any) {
+      console.log (error.message)
+    }
   };
 
   return (
