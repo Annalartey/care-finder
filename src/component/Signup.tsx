@@ -1,17 +1,37 @@
 import * as React from 'react';
+import {  useState} from "react";
 import { Link } from "react-router-dom"
 import logo from "./images/logo.png"
+import { createUserWithEmailAndPassword , onAuthStateChanged, } from 'firebase/auth';
+import { auth } from '../lib/init-firebase'
+
+
 export default function Example() {
+
+  const [registerEmail, setRegisterEmail] = useState<string> ("") 
+  const [registerPassword, setRegisterPassword] = useState<string> ("")
+  const [user, setUser] = useState<any> ({})
+
+  onAuthStateChanged (auth, (currentUser) => {
+    setUser(currentUser);
+  })
+
+
+  const signup = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword (
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user);
+    } catch (error: any) {
+      console.log (error.message)
+    }
+  };
+
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1">
         <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -40,11 +60,15 @@ export default function Example() {
                       Email address
                     </label>
                     <div className="mt-2">
-                      <input
+                    <input
                         id="email"
                         name="email"
                         type="email"
+                        placeholder='Email...'
                         autoComplete="email"
+                        onChange={(e) => {
+                          setRegisterEmail(e.target.value)
+                        }}
                         required
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -56,11 +80,15 @@ export default function Example() {
                       Password
                     </label>
                     <div className="mt-2">
-                      <input
+                    <input
                         id="password"
                         name="password"
                         type="password"
+                        placeholder='Password...'
                         autoComplete="current-password"
+                        onChange={(e) => {
+                          setRegisterPassword(e.target.value)
+                        }}
                         required
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -89,6 +117,7 @@ export default function Example() {
 
                   <div>
                     <button
+                      onClick={signup}
                       type="submit"
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
@@ -144,6 +173,7 @@ export default function Example() {
             alt=""
           />
         </div>
+        <p>{user?.email}</p>
       </div>
     </>
   )
