@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Link } from "react-router-dom"
 import logo from "./images/logo.png"
-import { signInWithEmailAndPassword , onAuthStateChanged, } from 'firebase/auth';
+import { signInWithEmailAndPassword , onAuthStateChanged, signOut } from 'firebase/auth';
 import { signInWithPopup, FacebookAuthProvider} from 'firebase/auth'
 import { auth } from '../lib/init-firebase'
 
@@ -39,6 +39,12 @@ export default function SignIn() {
       console.log (error.message)
     }
   };
+
+  const userSignOut = () => {
+    signOut(auth).then(() => {
+      console.log("signed out")
+    }).catch(error => console.log(error))
+  }
 
 
   return (
@@ -201,8 +207,7 @@ export default function SignIn() {
               </div>
             </div>
           </div>
-          <p>{user?.email}</p>
-          <button>logout</button>
+          {user? <><p>{`signed in as ${user.email}`}</p><button onClick={userSignOut}>sign out</button></> : <p>signed out</p>}
         </div>
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
