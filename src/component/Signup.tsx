@@ -2,32 +2,28 @@ import * as React from 'react';
 import {  useState} from "react";
 import { Link } from "react-router-dom"
 import logo from "./images/logo.png"
-import { createUserWithEmailAndPassword , onAuthStateChanged, } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../lib/init-firebase'
 
 
 export default function Example() {
 
-  const [registerEmail, setRegisterEmail] = useState<string> ("") 
-  const [registerPassword, setRegisterPassword] = useState<string> ("")
+
+  const [email, setEmail] = useState<string> ("") 
+  const [password, setPassword] = useState<string> ("")
   const [user, setUser] = useState<any> ({})
 
-  onAuthStateChanged (auth, (currentUser) => {
-    setUser(currentUser);
-  })
 
-
-  const signup = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword (
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(user);
-    } catch (error: any) {
-      console.log (error.message)
-    }
+  const signup = (e: any) => {
+    e.preventDefault();
+   createUserWithEmailAndPassword(auth, email, password)
+   .then((userCredential) => {
+    setUser(userCredential.user)
+    console.log(user)
+   })
+   .catch((error) => {
+    console.log(error)
+   })
   };
 
   return (
@@ -67,7 +63,7 @@ export default function Example() {
                         placeholder='Email...'
                         autoComplete="email"
                         onChange={(e) => {
-                          setRegisterEmail(e.target.value)
+                          setEmail(e.target.value)
                         }}
                         required
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -87,7 +83,7 @@ export default function Example() {
                         placeholder='Password...'
                         autoComplete="current-password"
                         onChange={(e) => {
-                          setRegisterPassword(e.target.value)
+                          setPassword(e.target.value)
                         }}
                         required
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -117,7 +113,7 @@ export default function Example() {
 
                   <div>
                     <button
-                      onClick={signup}
+                      onSubmit={signup}
                       type="submit"
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >

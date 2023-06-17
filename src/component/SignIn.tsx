@@ -26,7 +26,8 @@ export default function SignIn() {
     })
   }
 
-  const login = async () => {
+  const login = async (e: any) => {
+    e.preventDefault();
     try {
       const user = await signInWithEmailAndPassword (
         auth,
@@ -200,6 +201,7 @@ export default function SignIn() {
               </div>
             </div>
           </div>
+          <p>{user?.email}</p>
         </div>
         <div className="relative hidden w-0 flex-1 lg:block">
           <img
@@ -208,7 +210,6 @@ export default function SignIn() {
             alt=""
           />
         </div>
-        <p>{user?.email}</p>
       </div>
     </>
   )
