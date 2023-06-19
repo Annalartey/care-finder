@@ -6,7 +6,9 @@ import {
 } from '@heroicons/react/20/solid'
 import {collection, getDocs} from 'firebase/firestore'
 import {db} from "../lib/init-firebase"
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Header from "./Header"
+
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -101,9 +103,12 @@ function HospitalSearch() {
 
   return (
    <div>
+    <div>
+      <Header/>
+    </div>
       
 <form>
-  <Link to = "/" ><button>back</button></Link>
+  
     <div className="flex">
 
         <Menu as="div" className="relative inline-block text-left">
