@@ -2,31 +2,41 @@ import * as React from 'react';
 import {  useState} from "react";
 import { Link } from "react-router-dom"
 import logo from "./images/logo.png"
-import { createUserWithEmailAndPassword, onAuthStateChanged, } from 'firebase/auth';
-import { auth } from '../lib/init-firebase'
+// import { createUserWithEmailAndPassword, onAuthStateChanged, } from 'firebase/auth';
+// import { auth } from '../lib/init-firebase'
+import useAuth from "../hooks/useAuth"
 
 
-export default function Example() {
+export default function SignUp() {
 
 
   const [email, setEmail] = useState<string> ("") 
   const [password, setPassword] = useState<string> ("")
-  const [user, setUser] = useState<any> ({})
+  const [loading, setLoading] = useState<boolean> (false)
 
-  onAuthStateChanged (auth, (currentUser) => {
-    setUser(currentUser);
-  })
+  const { handleAuthRegister } = useAuth();
+  
+  const [user, setUser] = useState<{}>({})
+
+  // onAuthStateChanged (auth, (currentUser) => {
+  //   setUser(currentUser);
+  // })
 
 
-  const signup = async (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      const user = await createUserWithEmailAndPassword (
-        auth,
+      const res = await handleAuthRegister (
         email,
         password
       );
-      console.log(user);
+      setEmail("")
+      setPassword("")
+      setUser(res);
+      console.log(user)
+      setLoading(false)
     } catch (error: any) {
       console.log (error.message)
     }
@@ -63,6 +73,7 @@ export default function Example() {
                     </label>
                     <div className="mt-2">
                     <input
+                        value={email}
                         id="email"
                         name="email"
                         type="email"
@@ -83,6 +94,7 @@ export default function Example() {
                     </label>
                     <div className="mt-2">
                     <input
+                        value={password}
                         id="password"
                         name="password"
                         type="password"
@@ -119,11 +131,10 @@ export default function Example() {
 
                   <div>
                     <button
-                      onSubmit={signup}
-                      type="submit"
+                      onClick={handleSubmit}
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Sign in
+                      {loading? "loading..." : "Sign up"}
                     </button>
                   </div>
                 </form>
@@ -175,7 +186,7 @@ export default function Example() {
             alt=""
           />
         </div>
-        <p>{user?.email}</p>
+        {/* <p>{user?.email}</p> */}
       </div>
     </>
   )
