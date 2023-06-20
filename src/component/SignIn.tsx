@@ -13,7 +13,7 @@ export default function SignIn() {
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { handleAuthLogin, signInWithFacebook } = useAuth();
+  const { user, handleAuthLogin, signInWithFacebook, handleAuthLogout } = useAuth();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -30,7 +30,20 @@ export default function SignIn() {
     }
   };
 
-  const handleFacebookLogin =  (e: any) => {
+  // const handleLogoutSubmit = async (e: any) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     await handleAuthLogout();
+  //     setLoading(false)
+  //     console.log("logged out")
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const handleFacebookLogin = (e: any) => {
     e.preventDefault();
     signInWithFacebook();
   };
@@ -107,7 +120,7 @@ export default function SignIn() {
                     </label>
                     <div className="mt-2">
                       <input
-                      value={email}
+                        value={email}
                         id="email"
                         name="email"
                         type="email"
@@ -131,7 +144,7 @@ export default function SignIn() {
                     </label>
                     <div className="mt-2">
                       <input
-                      value={password}
+                        value={password}
                         id="password"
                         name="password"
                         type="password"
@@ -180,6 +193,16 @@ export default function SignIn() {
                       {loading ? "loading..." : "Sign in"}
                     </button>
                   </div>
+                  {/* {user ?
+                    <>
+                      <p>{user.email}</p>
+                      <button onClick={handleLogoutSubmit}>logout</button>
+                    </>
+                    :
+                    <>
+
+                    </>
+                  } */}
                 </form>
               </div>
 

@@ -4,6 +4,7 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "./images/logo.png"
 import { Link } from 'react-router-dom'
+import useAuth from "../hooks/useAuth"
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -14,6 +15,15 @@ const navigation = [
 ]
 
 function Header() {
+  const { user, handleAuthLogout } = useAuth()
+
+  const handleLogout = async () => {
+    await handleAuthLogout()
+    alert("You are logging out of carefinder")
+    console.log("logged out")
+  }
+
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
     <div>
@@ -47,9 +57,23 @@ function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="signin" className="text-sm font-semibold leading-6 text-black">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+            {user ?
+              <div className="flex py-6">
+                <p>loggd in as {user.email}</p>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm font-semibold leading-6 text-black">
+                  Log out <span aria-hidden="true">&rarr;</span>
+                </button>
+
+              </div>
+              :
+              <div className="py-6">
+                <Link to="/signin" className="text-sm font-semibold leading-6 text-black">
+                  Log in <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </div>
+            }
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -86,13 +110,27 @@ function Header() {
                     </a>
                   ))}
                 </div>
-                <div className="py-6">
-                  <Link to='signin'
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                  >
-                    Log in
-                  </Link>
-                </div>
+                {user ?
+                  <div className="py-6">
+                    {user.email}
+                    <button
+                      onClick={handleLogout}
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                    >
+                      Log out
+                    </button>
+
+                  </div>
+                  :
+                  <div className="py-6">
+                    <Link to='/signin'
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                    >
+                      Log in
+                    </Link>
+                  </div>
+                }
+
               </div>
             </div>
           </Dialog.Panel>
