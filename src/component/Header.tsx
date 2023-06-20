@@ -4,6 +4,7 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "./images/logo.png"
 import { Link } from 'react-router-dom'
+import useAuth from "../hooks/useAuth"
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -14,13 +15,21 @@ const navigation = [
 ]
 
 function Header() {
+  const { user, handleAuthLogout } = useAuth()
+  const handleLogout = async () => {
+    await handleAuthLogout()
+    alert("You are logging out of carefinder")
+    console.log("logged out")
+  }
+
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
     <div>
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 py-0 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
-          <Link to = '/' className="-m-1.5 p-1.5">
+            <Link to='/' className="-m-1.5 p-1.5">
               <span className="sr-only">Care finder</span>
               <img
                 className="h-14 w-auto lg:h-20"
@@ -47,16 +56,30 @@ function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="signin" className="text-sm font-semibold leading-6 text-white">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+            {user ?
+              <div className="flex py-6">
+                <p className='text-white'>loggd in as {user.email}</p>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm font-semibold leading-6 text-white">
+                  Log out <span aria-hidden="true">&rarr;</span>
+                </button>
+
+              </div>
+              :
+              <div className="py-6">
+                <Link to="signin" className="text-sm font-semibold leading-6 text-white">
+                  Log in <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </div>
+            }
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
           <div className="fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-0 sm:max-w-sm sm:ring-1 sm:ring-white/10">
             <div className="flex items-center justify-between">
-            <Link to = '/' className="-m-1.5 p-1.5">
+              <Link to='/' className="-m-1.5 p-1.5">
                 <span className="sr-only">Care finder</span>
                 <img
                   className="h-14 w-auto lg:h-20"
@@ -87,11 +110,26 @@ function Header() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Link to='signin'
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                  >
-                    Log in
-                  </Link>
+                  {user ?
+                    <div className="text-white py-6">
+                      {user.email}
+                      <button
+                        onClick={handleLogout}
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                      >
+                        Log out
+                      </button>
+
+                    </div>
+                    :
+                    <div className="py-6">
+                      <Link to='/signin'
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                      >
+                        Log in
+                      </Link>
+                    </div>
+                  }
                 </div>
               </div>
             </div>
