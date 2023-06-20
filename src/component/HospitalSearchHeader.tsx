@@ -40,6 +40,7 @@ function Header() {
             </Link>
           </div>
           <div className="flex lg:hidden">
+            {user ? <p> signed in as {user.email}</p> : <></>}
             <button
               type="button"
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
@@ -69,7 +70,7 @@ function Header() {
               </div>
               :
               <div className="py-6">
-                <Link to="/signin" className="text-sm font-semibold leading-6 text-black">
+                <Link to="signin" className="text-sm font-semibold leading-6 text-black">
                   Log in <span aria-hidden="true">&rarr;</span>
                 </Link>
               </div>
@@ -88,6 +89,7 @@ function Header() {
                   alt=""
                 />
               </Link>
+
               <button
                 type="button"
                 className="-m-2.5 rounded-md p-2.5 text-gray-400"
@@ -96,6 +98,8 @@ function Header() {
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon className="h-6 w-6" aria-hidden="true" />
               </button>
+
+
             </div>
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/25">

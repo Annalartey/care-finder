@@ -12,6 +12,7 @@ export default function SignIn() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [disable, setDisable] = useState<boolean>(true);
 
   const { user, handleAuthLogin, signInWithFacebook, handleAuthLogout } = useAuth();
 
@@ -188,6 +189,7 @@ export default function SignIn() {
                   <div>
                     <button
                       onClick={handleSubmit}
+                      disabled={(!email || !password) ? disable : !disable}
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       {loading ? "loading..." : "Sign in"}
