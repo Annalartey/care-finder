@@ -7,7 +7,7 @@ import {
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from "../lib/init-firebase"
 // import { Link } from 'react-router-dom';
-import Header from "./Header"
+import HospitalSearchHeader from "./HospitalSearchHeader"
 
 
 function classNames(...classes: any) {
@@ -104,7 +104,7 @@ function HospitalSearch() {
   return (
     <div>
       <div>
-        <Header />
+        <HospitalSearchHeader />
       </div>
 
       <form>
