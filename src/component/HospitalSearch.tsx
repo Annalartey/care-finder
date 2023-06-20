@@ -8,6 +8,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from "../lib/init-firebase"
 // import { Link } from 'react-router-dom';
 import HospitalSearchHeader from "./HospitalSearchHeader"
+import useAuth from "../hooks/useAuth"
 
 
 function classNames(...classes: any) {
@@ -22,6 +23,8 @@ function HospitalSearch() {
   const [popupContent, setPopupContent] = useState<any>([])
   const [popupToggle, setPopupToggle] = useState<boolean>(false)
   // const [menuValue, setMenuValue] = useState <string> ("")
+
+  const { user } = useAuth()
 
   const changeHospitalContent = (hospital: []) => {
     setPopupContent([hospital])
@@ -263,6 +266,16 @@ function HospitalSearch() {
 
                 <br />
                 <a href={pop.data.website || ""} target="__blank" className='text-blue-600 hover:cursor-pointer hover:text-blue-300'>visit hospital's website</a>
+                <div>
+                  {user ?
+                    <>
+                      <button>Export</button>
+                      <button>Share</button>
+                    </>
+                    :
+                    <p>login to export and share hospitals</p>
+                  }
+                </div>
               </div>
             )
           })}
