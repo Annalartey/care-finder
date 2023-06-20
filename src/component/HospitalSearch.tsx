@@ -247,7 +247,7 @@ function HospitalSearch() {
 
       </div>
       {popupToggle && <div className='popup-container text-left'>
-        <div className="popup-body my-48 mx-auto p-8">
+        <div className="popup-body w-full lg:w-3/5 my-48 mx-auto p-8">
           <div className='bg-white flex justify-end'>
             <p className='text-blue-600 text-lg hover:text-blue-800 hover:cursor-pointer' onClick={() => setPopupToggle(false)}>BACK <span aria-hidden="true">&rarr;</span></p>
           </div>
