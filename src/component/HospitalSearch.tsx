@@ -18,6 +18,7 @@ function HospitalSearch() {
   const [hospitals, setHospitals] = useState<any[]>([])
   const [searchInput, setSearchInput] = useState<string>("")
   const [searchInputReg, setSearchInputReg] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(true)
   // const [menuValue, setMenuValue] = useState <string> ("")
 
   const handleChange = (e: any) => {
@@ -38,6 +39,7 @@ function HospitalSearch() {
       console.log(searchInput)
       searchHospitalsTown();
       setSearchInput("")
+      setLoading(false)
     } else {
       alert("please input a town found in a region in Ghana")
     }
@@ -96,6 +98,7 @@ function HospitalSearch() {
           id: doc.id
         }))
         setHospitals(hosp)
+        setLoading(false)
       })
       .catch(error => console.log(error.message))
   }
@@ -190,35 +193,51 @@ function HospitalSearch() {
 
 
       <div className="lg:mx-40 flex flex-col md:flex-row flex-wrap">
-        {hospitals.map((hospital, id) => {
-          return (
-            <a
-              key={hospital.id}
-              className="w-full md:w-1/2 lg:w-1/3 text-center md:text-left py-6"
-              href={hospital.data.website || ""}
-              target="__blank"
-              rel="noreferrer"
-              data-aos="fade-right"
-              data-aos-delay="100"
-            >
-              <div className="rounded shadow-lg w-80 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 ">
-                <div
-                  style={{ backgroundImage: `url(${hospital.image})` }}
-                  className="bg-center bg-cover shadow-sm w-80 h-72 mx-auto md:mr-auto md:ml-o md:mx-0 "
-                ></div>
+        {loading ?
+          <p>loading...</p>
+          :
+          <>
+            {
+              (hospitals.length > 0) ?
+                <>
+                  {hospitals.map((hospital) => {
+                    return (
+                      <a
+                        key={hospital.id}
+                        className="w-full md:w-1/2 lg:w-1/3 text-center md:text-left py-6"
+                        href={hospital.data.website || ""}
+                        target="__blank"
+                        rel="noreferrer"
+                        data-aos="fade-right"
+                        data-aos-delay="100"
+                      >
+                        <div className="rounded shadow-lg w-80 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 ">
+                          <div
+                            style={{ backgroundImage: `url(${hospital.image})` }}
+                            className="bg-center bg-cover shadow-sm w-80 h-72 mx-auto md:mr-auto md:ml-o md:mx-0 "
+                          ></div>
 
-                <div className="text-center">
-                  <h1 className="font-bold text-xl mt-4 mb-4 text-gray-900">
-                    {hospital.data.name}
-                  </h1>
-                  <p className="text-xl text-gray-900">
-                    Opens {hospital.data.openTime}
-                  </p>
-                </div>
-              </div>
-            </a>
-          );
-        })}
+                          <div className="text-center">
+                            <h1 className="font-bold text-xl mt-4 mb-4 text-gray-900">
+                              {hospital.data.name}
+                            </h1>
+                            <p className="text-xl text-gray-900">
+                              Opens {hospital.data.openTime}
+                            </p>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </>
+                :
+                <p> No Hospitals found. Please search for a location in Ghana </p>
+            }
+          </>
+        }
+
+
+
       </div>
 
 
