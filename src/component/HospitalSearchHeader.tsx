@@ -70,7 +70,7 @@ function Header() {
               </div>
               :
               <div className="py-6">
-                <Link to="signin" className="text-sm font-semibold leading-6 text-black">
+                <Link to="/signin" className="text-sm font-semibold leading-6 text-black">
                   Log in <span aria-hidden="true">&rarr;</span>
                 </Link>
               </div>
@@ -115,7 +115,7 @@ function Header() {
                   ))}
                 </div>
                 {user ?
-                  <div className="py-6">
+                  <div className="py-6 text-white">
                     {user.email}
                     <button
                       onClick={handleLogout}
@@ -123,7 +123,7 @@ function Header() {
                     >
                       Log out
                     </button>
-
+                    <Link to="/add-hospital"><button>Add Hospital</button></Link>
                   </div>
                   :
                   <div className="py-6">

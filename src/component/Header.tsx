@@ -119,6 +119,7 @@ function Header() {
                       >
                         Log out
                       </button>
+                      <Link to="add-hospital"><button>Add Hospital</button></Link>
 
                     </div>
                     :
