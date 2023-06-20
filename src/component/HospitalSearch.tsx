@@ -19,8 +19,15 @@ function HospitalSearch() {
   const [searchInput, setSearchInput] = useState<string>("")
   const [searchInputReg, setSearchInputReg] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(true)
+  const [popupContent, setPopupContent] = useState<any>([])
+  const [popupToggle, setPopupToggle] = useState<boolean>(false)
   // const [menuValue, setMenuValue] = useState <string> ("")
 
+  const changeHospitalContent = (hospital: []) => {
+    setPopupContent([hospital])
+    setPopupToggle(!popupToggle)
+    console.log(hospital)
+  }
   const handleChange = (e: any) => {
     e.preventDefault();
     setSearchInput(e.target.value)
@@ -202,11 +209,10 @@ function HospitalSearch() {
                 <>
                   {hospitals.map((hospital) => {
                     return (
-                      <a
+                      <div
                         key={hospital.id}
                         className="w-full md:w-1/2 lg:w-1/3 text-center md:text-left py-6"
-                        href={hospital.data.website || ""}
-                        target="__blank"
+
                         rel="noreferrer"
                         data-aos="fade-right"
                         data-aos-delay="100"
@@ -224,9 +230,10 @@ function HospitalSearch() {
                             <p className="text-xl text-gray-900">
                               Opens {hospital.data.openTime}
                             </p>
+                            <button onClick={() => changeHospitalContent(hospital)}>details</button>
                           </div>
                         </div>
-                      </a>
+                      </div>
                     );
                   })}
                 </>
@@ -239,6 +246,28 @@ function HospitalSearch() {
 
 
       </div>
+      {popupToggle && <div className='popup-container text-left'>
+        <div className="popup-body my-48 mx-auto p-8">
+          <div className='bg-white flex justify-end'>
+            <p className='text-blue-600 text-lg hover:text-blue-800 hover:cursor-pointer' onClick={() => setPopupToggle(false)}>BACK <span aria-hidden="true">&rarr;</span></p>
+          </div>
+          {popupContent.map((pop: any) => {
+            return (
+              <div key={pop.id}>
+                <p>Name: {pop.data.name}</p>
+                <p>Region: {pop.data.region}</p>
+                <p>Town / City: {pop.data.town}</p>
+                <p>Location: {pop.data.location}</p>
+                <p>Open Time: {pop.data.openTime}</p>
+                <p>Phone Number: {pop.data.phoneNo}</p>
+
+                <br />
+                <a href={pop.data.website || ""} target="__blank" className='text-blue-600 hover:cursor-pointer hover:text-blue-300'>visit hospital's website</a>
+              </div>
+            )
+          })}
+        </div>
+      </div>}
 
 
     </div>
