@@ -260,16 +260,19 @@ function HospitalSearch() {
           {popupContent.map((pop: any) => {
             return (
               <div key={pop.id}>
-                <p>Name: {pop.data.name}</p>
-                <p>Region: {pop.data.region}</p>
-                <p>Town / City: {pop.data.town}</p>
-                <p>Location: {pop.data.location}</p>
-                <p>Open Time: {pop.data.openTime}</p>
-                <p>Phone Number: {pop.data.phoneNo}</p>
+                <div id="pdf">
+                  <p>Name: {pop.data.name}</p>
+                  <p>Region: {pop.data.region}</p>
+                  <p>Town / City: {pop.data.town}</p>
+                  <p>Location: {pop.data.location}</p>
+                  <p>Open Time: {pop.data.openTime}</p>
+                  <p>Phone Number: {pop.data.phoneNo}</p>
 
-                <br />
-                <a href={pop.data.website || ""} target="__blank" className='text-blue-600 hover:cursor-pointer hover:text-blue-300'>visit hospital's website</a>
-                <br />
+                  <br />
+                  <a href={pop.data.website || ""} target="__blank" className='text-blue-600 hover:cursor-pointer hover:text-blue-300'>visit hospital's website</a>
+                  <br />
+                </div>
+
                 <div>
                   {user ?
                     <>
