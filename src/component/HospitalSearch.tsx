@@ -77,7 +77,7 @@ function HospitalSearch() {
           id: doc.id
         }))
         const result = hosp.filter((hosp: any) => {
-          return hosp.data.location.toLowerCase() === searchInput.toLowerCase();
+          return hosp.data.town.toLowerCase() === searchInput.toLowerCase();
         });
         console.log(result)
         setHospitals(result)

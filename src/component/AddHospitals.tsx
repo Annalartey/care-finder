@@ -8,6 +8,12 @@ function AddHospitals() {
   const [hospital, setHospital] = useState("");
   const [hospitals, setHospitals] = useState([]);
   const [hospitalName, setHospitalName] = useState("");
+  const [region, setRegion] = useState("");
+  const [town, setTown] = useState("");
+  const [location, setLocation] = useState("");
+  const [openTime, setOpenTime] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [website, setWebsite] = useState("");
 
   // function addHospitals() {
   //   const hospitalCollectionRef = collection(db, 'hospitals')
@@ -28,7 +34,14 @@ function AddHospitals() {
 
     try {
       const docRef = await addDoc(collection(db, "hospitals"), {
-        data: hospital,
+        name: hospitalName,
+        region: region,
+        town: town,
+        location: location,
+        openTime: openTime,
+        phoneNo: phoneNo,
+        website: website,
+
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
@@ -83,13 +96,13 @@ function AddHospitals() {
               </label>
               <div className="mt-2">
                 <input
-                  value={hospitalName}
-                  id="hospitalName"
-                  name="hospitalName"
-                  placeholder="Hospital Name..."
+                  value={region}
+                  id="region"
+                  name="region"
+                  placeholder="Hospital Region..."
                   autoComplete=""
                   onChange={(e) => {
-                    setHospitalName(e.target.value);
+                    setRegion(e.target.value);
                   }}
                   required
                   className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -98,20 +111,20 @@ function AddHospitals() {
             </div>
             <div>
               <label
-                htmlFor="hospitalName"
+                htmlFor="town"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 City / Town
               </label>
               <div className="mt-2">
                 <input
-                  value={hospitalName}
-                  id="hospitalName"
-                  name="hospitalName"
-                  placeholder="Hospital Name..."
+                  value={town}
+                  id="town"
+                  name="town"
+                  placeholder="Hospital City/ Town..."
                   autoComplete=""
                   onChange={(e) => {
-                    setHospitalName(e.target.value);
+                    setTown(e.target.value);
                   }}
                   required
                   className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -120,20 +133,20 @@ function AddHospitals() {
             </div>
             <div>
               <label
-                htmlFor="hospitalName"
+                htmlFor="location"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Location
               </label>
               <div className="mt-2">
                 <input
-                  value={hospitalName}
-                  id="hospitalName"
-                  name="hospitalName"
-                  placeholder="Hospital Name..."
+                  value={location}
+                  id="location"
+                  name="location"
+                  placeholder="Hospital Location..."
                   autoComplete=""
                   onChange={(e) => {
-                    setHospitalName(e.target.value);
+                    setLocation(e.target.value);
                   }}
                   required
                   className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -142,20 +155,20 @@ function AddHospitals() {
             </div>
             <div>
               <label
-                htmlFor="hospitalName"
+                htmlFor="openTime"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Open time
               </label>
               <div className="mt-2">
                 <input
-                  value={hospitalName}
-                  id="hospitalName"
-                  name="hospitalName"
-                  placeholder="Hospital Name..."
+                  value={openTime}
+                  id="openTime"
+                  name="openTime"
+                  placeholder="Hospital Working Hours..."
                   autoComplete=""
                   onChange={(e) => {
-                    setHospitalName(e.target.value);
+                    setOpenTime(e.target.value);
                   }}
                   required
                   className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -164,20 +177,20 @@ function AddHospitals() {
             </div>
             <div>
               <label
-                htmlFor="hospitalName"
+                htmlFor="phoneNo"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Phone number
               </label>
               <div className="mt-2">
                 <input
-                  value={hospitalName}
-                  id="hospitalName"
-                  name="hospitalName"
-                  placeholder="Hospital Name..."
+                  value={phoneNo}
+                  id="phoneNo"
+                  name="phoneNo"
+                  placeholder="Hospital Phone Number..."
                   autoComplete=""
                   onChange={(e) => {
-                    setHospitalName(e.target.value);
+                    setPhoneNo(e.target.value);
                   }}
                   required
                   className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -186,20 +199,20 @@ function AddHospitals() {
             </div>
             <div>
               <label
-                htmlFor="hospitalName"
+                htmlFor="website"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Hospital's website
               </label>
               <div className="mt-2">
                 <input
-                  value={hospitalName}
-                  id="hospitalName"
-                  name="hospitalName"
-                  placeholder="Hospital Name..."
+                  value={website}
+                  id="website"
+                  name="website"
+                  placeholder="Hospital Website..."
                   autoComplete=""
                   onChange={(e) => {
-                    setHospitalName(e.target.value);
+                    setWebsite(e.target.value);
                   }}
                   required
                   className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -207,6 +220,7 @@ function AddHospitals() {
               </div>
             </div>
             <button
+              onClick={addHospital}
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >Add</button>
           </form>
