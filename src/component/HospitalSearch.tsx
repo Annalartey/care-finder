@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from "react-router-dom"
 import { Fragment, useState, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { Menu, Transition } from '@headlessui/react'
 import {
   ChevronDownIcon,
@@ -247,6 +248,7 @@ function HospitalSearch() {
 
 
       <div className="lg:mx-40 flex flex-col md:flex-row flex-wrap">
+
         {loading ?
           <p>loading...</p>
           :
@@ -271,9 +273,9 @@ function HospitalSearch() {
                           ></div>
 
                           <div className="text-center">
-                            <h1 className="font-bold text-xl mt-4 mb-4 text-gray-900">
+                            <ReactMarkdown className="font-bold text-xl mt-4 mb-4 text-gray-900">
                               {hospital.data.name}
-                            </h1>
+                            </ReactMarkdown>
                             <p className="text-xl text-gray-900">
                               Opens {hospital.data.openTime}
                             </p>
@@ -284,18 +286,12 @@ function HospitalSearch() {
                     );
                   })}
                   <div>
-                    {user ?
-                      <div>
-                        <button><CSVLink
-                          ref={csvLinkRef}
-                          headers={csvReport.headers}
-                          data={data1}
-                        >Export hospital details to CSV file</CSVLink></button>
-                        <button>Share hospitals</button>
-                      </div>
-                      :
-                      <p>please <span><Link to="/signin">login</Link></span> to export and share hospital details</p>
-                    }
+                    <button><CSVLink
+                      ref={csvLinkRef}
+                      headers={csvReport.headers}
+                      data={data1}
+                    >Export hospital details to CSV file</CSVLink></button>
+                    <button>Share hospitals</button>
                   </div>
                 </>
                 :
@@ -304,9 +300,8 @@ function HospitalSearch() {
           </>
         }
 
-
-
       </div>
+
       {popupToggle && <div className='popup-container text-left pt-40'>
         <div className="popup-body w-full lg:w-3/5 my-48 mx-auto p-8">
           <div className='bg-white flex justify-end'>
@@ -328,20 +323,15 @@ function HospitalSearch() {
                   <br />
                 </div>
 
-                <div>
-                  {user ?
-                    <>
-                      <ExportHospitals />
-                      <CSVLink
-                        ref={csvLinkRef}
-                        headers={csvReport.headers}
-                        data={csvReport.data}
-                      >Export to CSV</CSVLink>
-                      <ShareHospitals />
-                    </>
-                    :
-                    <p>please <span><Link to="/signin">login</Link></span> to export and share hospital details</p>
-                  }
+                <div className='flex justify-between'>
+                  <ExportHospitals />
+                  <CSVLink
+                    className="-mx-3 bg-gray-400 my-4 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800 text-center"
+                    ref={csvLinkRef}
+                    headers={csvReport.headers}
+                    data={csvReport.data}
+                  >Export to CSV</CSVLink>
+                  <ShareHospitals />
                 </div>
               </div>
             )

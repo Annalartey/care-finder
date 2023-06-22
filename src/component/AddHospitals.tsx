@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown'
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../lib/init-firebase"
 import { Link } from "react-router-dom";
 import logo from "./images/logo.png";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function AddHospitals() {
-  const [hospital, setHospital] = useState("");
-  const [hospitals, setHospitals] = useState([]);
   const [hospitalName, setHospitalName] = useState("");
   const [region, setRegion] = useState("");
   const [town, setTown] = useState("");
@@ -14,19 +14,6 @@ function AddHospitals() {
   const [openTime, setOpenTime] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [website, setWebsite] = useState("");
-
-  // function addHospitals() {
-  //   const hospitalCollectionRef = collection(db, 'hospitals')
-  //   addDoc(hospitalCollectionRef), 
-  //     .then(response => {
-  //     const hosp: any = response.docs.map(doc => ({
-  //       data: doc.data(),
-  //       id: doc.id
-  //     }))
-  //     setHospitals(hosp)
-  //   })
-  //       .catch(error => console.log(error.message))
-  // }
 
 
   const addHospital = async (e: any) => {
@@ -43,6 +30,13 @@ function AddHospitals() {
         website: website,
 
       });
+      setHospitalName("")
+      setRegion("")
+      setTown("")
+      setLocation("")
+      setOpenTime("")
+      setPhoneNo("")
+      setWebsite("")
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -53,7 +47,7 @@ function AddHospitals() {
 
   return (
     <div className="flex min-h-full h-screen flex-1">
-      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+      <div className="flex flex-1 flex-row justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
             <Link to="/">
@@ -62,6 +56,10 @@ function AddHospitals() {
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Add new hospitals
             </h2>
+            <div>
+              <VisibilityIcon />
+              MARKDOWN
+            </div>
 
           </div>
           <form className="space-y-6 mt-14">
@@ -224,6 +222,53 @@ function AddHospitals() {
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >Add</button>
           </form>
+        </div>
+        <div>
+          <div>
+            <VisibilityIcon />
+            PREVIEW
+          </div>
+          <div className="flex">
+            <p>Name:</p>
+            <ReactMarkdown children={hospitalName}
+            />
+          </div>
+          <div className="flex">
+            <ReactMarkdown> Region: </ReactMarkdown>
+            <ReactMarkdown
+              children={region}
+            />
+          </div>
+          <div className="flex">
+            <ReactMarkdown> City /Town: </ReactMarkdown>
+            <ReactMarkdown
+              children={town}
+            />
+          </div>
+          <div className="flex">
+            <ReactMarkdown> Location: </ReactMarkdown>
+            <ReactMarkdown
+              children={location}
+            />
+          </div>
+          <div className="flex">
+            <ReactMarkdown> Opening Time: </ReactMarkdown>
+            <ReactMarkdown
+              children={openTime}
+            />
+          </div>
+          <div className="flex">
+            <ReactMarkdown> Phone Number: </ReactMarkdown>
+            <ReactMarkdown
+              children={phoneNo}
+            />
+          </div>
+          <div className="flex">
+            <ReactMarkdown> Hospital's Website: </ReactMarkdown>
+            <ReactMarkdown
+              children={website}
+            />
+          </div>
         </div>
       </div>
       <div className="relative hidden w-0 flex-1 lg:block">

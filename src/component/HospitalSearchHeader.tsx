@@ -5,6 +5,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from "./images/logo.png"
 import { Link } from 'react-router-dom'
 import useAuth from "../hooks/useAuth"
+import ExportHospitals from './ExportHospitals';
+import ShareHospitals from './ShareHospitals';
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -66,7 +68,7 @@ function Header() {
                   className="text-sm font-semibold leading-6 text-black">
                   Log out <span aria-hidden="true">&rarr;</span>
                 </button>
-
+                <Link to="/add-hospital"><button>Add Hospital</button></Link>
               </div>
               :
               <div className="py-6">
@@ -75,6 +77,17 @@ function Header() {
                 </Link>
               </div>
             }
+
+            <div>
+              <ExportHospitals />
+              {/* <CSVLink
+                ref={csvLinkRef}
+                headers={csvReport.headers}
+                data={csvReport.data}
+              >Export to CSV</CSVLink> */}
+              <ShareHospitals />
+            </div>
+
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -114,26 +127,39 @@ function Header() {
                     </a>
                   ))}
                 </div>
-                {user ?
-                  <div className="py-6 text-white">
-                    {user.email}
-                    <button
-                      onClick={handleLogout}
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                    >
-                      Log out
-                    </button>
-                    <Link to="/add-hospital"><button>Add Hospital</button></Link>
+                <div>
+                  {user ?
+                    <div className="py-6 text-white">
+                      {user.email}
+                      <button
+                        onClick={handleLogout}
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                      >
+                        Log out
+                      </button>
+                      <Link to="/add-hospital"><button>Add Hospital</button></Link>
+                    </div>
+                    :
+                    <div className="py-6">
+                      <Link to='/signin'
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
+                      >
+                        Log in
+                      </Link>
+                    </div>
+                  }
+                  <div>
+                    <ExportHospitals />
+                    {/* <CSVLink
+                ref={csvLinkRef}
+                headers={csvReport.headers}
+                data={csvReport.data}
+              >Export to CSV</CSVLink> */}
+                    <ShareHospitals />
                   </div>
-                  :
-                  <div className="py-6">
-                    <Link to='/signin'
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800"
-                    >
-                      Log in
-                    </Link>
-                  </div>
-                }
+
+                </div>
+
 
               </div>
             </div>
