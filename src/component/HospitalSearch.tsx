@@ -267,11 +267,6 @@ function HospitalSearch() {
                         data-aos-delay="100"
                       >
                         <div className="rounded shadow-lg w-80 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 ">
-                          <div
-                            style={{ backgroundImage: `url(${hospital.image})` }}
-                            className="bg-center bg-cover shadow-sm w-80 h-72 mx-auto md:mr-auto md:ml-o md:mx-0 "
-                          ></div>
-
                           <div className="text-center">
                             <ReactMarkdown className="font-bold text-xl mt-4 mb-4 text-gray-900">
                               {hospital.data.name}
