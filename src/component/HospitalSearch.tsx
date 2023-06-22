@@ -15,6 +15,7 @@ import ShareHospitals from './ShareHospitals';
 import { CSVLink } from "react-csv";
 
 
+
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
@@ -27,6 +28,45 @@ function HospitalSearch() {
   const [popupContent, setPopupContent] = useState<any>([])
   const [popupToggle, setPopupToggle] = useState<boolean>(false)
   // const [menuValue, setMenuValue] = useState <string> ("")
+
+  const csvLinkRef = React.useRef(null)
+
+  const headers: {
+    label: string;
+    key: string;
+  }[] = [
+      { label: "Name", key: 'name' },
+      { label: "Region", key: "region" },
+      { label: "Town", key: "town" },
+      { label: "Location", key: "location" },
+      { label: "Opening Time", key: "openTime" },
+      { label: "Phone Number", key: "phoneNo" },
+    ];
+  const name = popupContent.map((popup: any) => popup.data.name);
+  const region = popupContent.map((popup: any) => popup.data.region);
+  const town = popupContent.map((popup: any) => popup.data.town);
+  const location = popupContent.map((popup: any) => popup.data.location);
+  const openTime = popupContent.map((popup: any) => popup.data.openTime);
+  const phoneNo = popupContent.map((popup: any) => popup.data.phoneNo);
+
+
+  const hospitalName = hospitals.map((hospital: any) => hospital.data.name);
+
+  const data = [
+    { name: name, region: region, town, location, openTime, phoneNo },
+    // { details: "3", info: "what" }
+  ];
+
+  const data1 = [
+    { name: hospitalName },
+    // { details: "3", info: "what" }
+  ];
+
+  const csvReport = {
+    data: data,
+    headers: headers,
+    filename: 'hospitals_details',
+  };
 
   const { user } = useAuth()
 
@@ -243,6 +283,20 @@ function HospitalSearch() {
                       </div>
                     );
                   })}
+                  <div>
+                    {user ?
+                      <div>
+                        <button><CSVLink
+                          ref={csvLinkRef}
+                          headers={csvReport.headers}
+                          data={data1}
+                        >Export hospital details to CSV file</CSVLink></button>
+                        <button>Share hospitals</button>
+                      </div>
+                      :
+                      <p>please <span><Link to="/signin">login</Link></span> to export and share hospital details</p>
+                    }
+                  </div>
                 </>
                 :
                 <p> No Hospitals found. Please search for a location in Ghana </p>
@@ -266,7 +320,7 @@ function HospitalSearch() {
                   <p>Region: {pop.data.region}</p>
                   <p>Town / City: {pop.data.town}</p>
                   <p>Location: {pop.data.location}</p>
-                  <p>Open Time: {pop.data.openTime}</p>
+                  <p>Opening Time: {pop.data.openTime}</p>
                   <p>Phone Number: {pop.data.phoneNo}</p>
 
                   <br />
@@ -278,11 +332,15 @@ function HospitalSearch() {
                   {user ?
                     <>
                       <ExportHospitals />
-                      <button></button>
+                      <CSVLink
+                        ref={csvLinkRef}
+                        headers={csvReport.headers}
+                        data={csvReport.data}
+                      >Export to CSV</CSVLink>
                       <ShareHospitals />
                     </>
                     :
-                    <p>please <span><Link to="/signin">login</Link></span> to export and share hospitals</p>
+                    <p>please <span><Link to="/signin">login</Link></span> to export and share hospital details</p>
                   }
                 </div>
               </div>
