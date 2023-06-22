@@ -13,6 +13,26 @@ const faqs = [
     answer:
       "Yes, you can have access to any hospital in Ghana.",
   },
+  {
+    question: "What is covered by the health insurance at Ghana Health Service?",
+    answer:
+      "Consultation and some medications, as well as some laboratories.",
+  },
+  {
+    question: "How flexible are working hours at Ghana Health Service?",
+    answer:
+      "Work 24hours at most hospitals. Very satisfactory.",
+  },
+  {
+    question: "What Is An Emergency?",
+    answer:
+      "What constitutes a medical emergency can only be ascertained by a qualified medical doctor or an attendant at a health facility. This notwithstanding, generally, a medical emergency could be said to be an acute injury or illness that poses an IMMEDIATE risk to a person’s life or long-term health.",
+  },
+  {
+    question: "How Do I Access Health Service In A Medical Emergency Situation?",
+    answer:
+      "In emergency situations, you can visit any health facility.",
+  },
   // More questions...
 ]
 
