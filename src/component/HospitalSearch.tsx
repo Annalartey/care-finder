@@ -266,15 +266,19 @@ function HospitalSearch() {
                         data-aos="fade-right"
                         data-aos-delay="100"
                       >
-                        <div className="rounded shadow-lg w-80 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 ">
+                        <div
+                          onClick={() => changeHospitalContent(hospital)}
+                          className="rounded shadow-sm w-80 h-40 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 hover:shadow-lg hover:cursor-pointer ">
                           <div className="text-center">
                             <ReactMarkdown className="font-bold text-xl mt-4 mb-4 text-gray-900">
                               {hospital.data.name}
                             </ReactMarkdown>
                             <p className="text-xl text-gray-900">
-                              Opens {hospital.data.openTime}
+                              {hospital.data.phoneNo}
                             </p>
-                            <button onClick={() => changeHospitalContent(hospital)}>details</button>
+                            <p className="text-xl text-gray-900">
+                              Opening Time: {hospital.data.openTime}
+                            </p>
                           </div>
                         </div>
                       </div>

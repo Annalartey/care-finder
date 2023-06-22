@@ -13,11 +13,14 @@ export default function SignIn() {
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [disable, setDisable] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [formValid, setFormValid] = useState<boolean>(false);
 
-  const { user, handleAuthLogin, signInWithFacebook, handleAuthLogout } = useAuth();
+  const { handleAuthLogin, signInWithFacebook } = useAuth();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    validateForm()
     setLoading(true);
 
     try {
@@ -25,7 +28,8 @@ export default function SignIn() {
       setEmail("");
       setPassword("");
       setLoading(false)
-      navigate("/hospital-search")
+      { formValid ? navigate("/hospital-search") : "" }
+      // navigate("/hospital-search")
     } catch (error) {
       console.log(error);
     }
@@ -49,42 +53,18 @@ export default function SignIn() {
     signInWithFacebook();
   };
 
-  // const [user, setUser] = useState<any> ({})
+  function validateForm() {
+    if (email.length == 0) {
+      alert('Invalid Form, Email Address can not be empty')
+      return
+    }
 
-  // onAuthStateChanged (auth, (currentUser) => {
-  //   setUser(currentUser);
-  // })
-
-  // const signInWithFacebook = () => {
-  //   const provider = new FacebookAuthProvider();
-  //   signInWithPopup(auth,provider)
-  //   .then((res) => {
-  //     console.log(res)
-  //   })
-  //   .catch((err) => {
-  //     console.log(err.message)
-  //   })
-  // }
-
-  // const login = async (e: any) => {
-  //   e.preventDefault();
-  //   try {
-  //     const user = await signInWithEmailAndPassword (
-  //       auth,
-  //       loginEmail,
-  //       loginPassword
-  //     );
-  //     console.log(user);
-  //   } catch (error: any) {
-  //     console.log (error.message)
-  //   }
-  // };
-
-  // const userSignOut = () => {
-  //   signOut(auth).then(() => {
-  //     console.log("signed out")
-  //   }).catch(error => console.log(error))
-  // }
+    if (password.length < 8) {
+      setErrorMessage("Invalid Form, Password must contain greater than or equal to 8 characters.")
+      return
+    }
+    setFormValid(true)
+  }
 
   return (
     <>
@@ -157,6 +137,7 @@ export default function SignIn() {
                         required
                         className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
+                      <p>{errorMessage}</p>
                     </div>
                   </div>
 
