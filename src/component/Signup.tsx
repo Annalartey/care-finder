@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {  useState} from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"
 import logo from "./images/logo.png"
 // import { createUserWithEmailAndPassword, onAuthStateChanged, } from 'firebase/auth';
@@ -10,35 +10,58 @@ import useAuth from "../hooks/useAuth"
 export default function SignUp() {
 
 
-  const [email, setEmail] = useState<string> ("") 
-  const [password, setPassword] = useState<string> ("")
-  const [loading, setLoading] = useState<boolean> (false)
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
+  const [confirmPassword, setConfirmPassword] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [formValid, setFormValid] = useState<boolean>(false);
 
   const { handleAuthRegister } = useAuth();
-  
+
   const [user, setUser] = useState<{}>({})
 
   // onAuthStateChanged (auth, (currentUser) => {
   //   setUser(currentUser);
   // })
+  function validateForm() {
+    if (email.length == 0) {
+      setErrorMessage('Invalid Form, Email Address can not be empty')
+      return
+    }
+
+    if (password.length < 6) {
+      setErrorMessage("Invalid Form, Password must contain greater than or equal to 8 characters.")
+      return
+    }
+    setFormValid(true)
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Invalid Form, Password must match confirmed password.")
+      return
+    }
+    setFormValid(true)
+  }
 
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    validateForm()
     setLoading(true);
 
     try {
-      const res = await handleAuthRegister (
+      const res = await handleAuthRegister(
         email,
         password
       );
       setEmail("")
       setPassword("")
+      setConfirmPassword("")
       setUser(res);
       console.log(user)
       setLoading(false)
     } catch (error: any) {
-      console.log (error.message)
+      console.log(error.message)
     }
   };
 
@@ -48,7 +71,7 @@ export default function SignUp() {
         <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
-              <Link to = '/'><img
+              <Link to='/'><img
                 className="h-10 w-auto"
                 src={logo}
                 alt="Care finder"
@@ -72,7 +95,7 @@ export default function SignUp() {
                       Email address
                     </label>
                     <div className="mt-2">
-                    <input
+                      <input
                         value={email}
                         id="email"
                         name="email"
@@ -93,13 +116,12 @@ export default function SignUp() {
                       Password
                     </label>
                     <div className="mt-2">
-                    <input
+                      <input
                         value={password}
                         id="password"
                         name="password"
                         type="password"
                         placeholder='Password...'
-                        autoComplete="current-password"
                         onChange={(e) => {
                           setPassword(e.target.value)
                         }}
@@ -108,6 +130,27 @@ export default function SignUp() {
                       />
                     </div>
                   </div>
+
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                      Confirm Password
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        value={confirmPassword}
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder='Confirm Password...'
+                        onChange={(e) => {
+                          setConfirmPassword(e.target.value)
+                        }}
+                        required
+                        className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+                  <p>{errorMessage}</p>
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -132,9 +175,10 @@ export default function SignUp() {
                   <div>
                     <button
                       onClick={handleSubmit}
+                      disabled={(!email || !password || !confirmPassword || password !== confirmPassword)}
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      {loading? "loading..." : "Sign up"}
+                      {loading ? "loading..." : "Sign up"}
                     </button>
                   </div>
                 </form>

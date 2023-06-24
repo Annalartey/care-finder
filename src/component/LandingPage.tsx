@@ -5,18 +5,26 @@ import Footer from './Footer';
 import Header from './Header';
 import Home from './Home';
 import WhyUs from './WhyUs';
+import { Helmet } from 'react-helmet-async'
 
 
 function LandingPage() {
   return (
-    <div>
-      <Header/>
-      <Home/>
-      <About/>
-      <WhyUs/>
-      <Faqs/>
-      <Footer/>
-    </div>
+    <>
+      {/* <Helmet>
+        <title>Landing Page</title>
+        <meta name="description" content="Search for a hospital in Ghana" />
+      </Helmet> */}
+
+      <div>
+        <Header />
+        <Home />
+        <About />
+        <WhyUs />
+        <Faqs />
+        <Footer />
+      </div>
+    </>
   )
 }
 

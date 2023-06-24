@@ -6,10 +6,12 @@ function WhyUs() {
       <div id='why-us' className="mx-auto max-w-7xl mt-20 lg:mt-0 sm:px-6 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">
           <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Why Carefinder? ...Our users love us
+            Why Carefinder?
+            <br />
+            ...Our users love us
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
-            “Good health is not something we can buy. However, it can be an extremely valuable savings account.” – Anne Wilson Schaef
+            “Good health is not something we can buy. However, it can be an extremely valuable savings account.” – Anne Wilson
           </p>
           <div className="mx-auto mt-20 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:max-w-4xl lg:grid-cols-5">
             <img

@@ -7,16 +7,22 @@ import logo from "./images/logo.png";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SignIn() {
   const navigate = useNavigate()
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [disable, setDisable] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>("")
   const [formValid, setFormValid] = useState<boolean>(false);
 
   const { handleAuthLogin, signInWithFacebook } = useAuth();
+
+  // const styles = {
+  //   popup: {
+  //     background: (disabled) ? "gray" : "blue",
+  //   }
+  // };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -55,11 +61,11 @@ export default function SignIn() {
 
   function validateForm() {
     if (email.length == 0) {
-      alert('Invalid Form, Email Address can not be empty')
+      setErrorMessage('Invalid Form, Email Address can not be empty')
       return
     }
 
-    if (password.length < 8) {
+    if (password.length < 6) {
       setErrorMessage("Invalid Form, Password must contain greater than or equal to 8 characters.")
       return
     }
@@ -170,7 +176,7 @@ export default function SignIn() {
                   <div>
                     <button
                       onClick={handleSubmit}
-                      disabled={(!email || !password) ? disable : !disable}
+                      disabled={(!email || !password)}
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       {loading ? "loading..." : "Sign in"}

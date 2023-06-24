@@ -7,6 +7,7 @@ import SignUp from "./component/Signup";
 import HospitalSearch from "./component/HospitalSearch";
 import UserAuthContext from "./context/UserAuthContext";
 import AddHospitals from "./component/AddHospitals";
+import ErrorPage from "./component/ErrorPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="signup" element={<SignUp />} />
           <Route path="hospital-search" element={<HospitalSearch />} />
           <Route path="add-hospital" element={<AddHospitals />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </UserAuthContext>

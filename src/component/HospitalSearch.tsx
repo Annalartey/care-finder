@@ -12,6 +12,7 @@ import { db } from "../lib/init-firebase"
 import HospitalSearchHeader from "./HospitalSearchHeader"
 import useAuth from "../hooks/useAuth"
 import ExportHospitals from './ExportHospitals';
+import ExportAllHospitals from './ExportAllHospitals';
 import ShareHospitals from './ShareHospitals';
 import { CSVLink } from "react-csv";
 
@@ -269,7 +270,7 @@ function HospitalSearch() {
                         <div
                           onClick={() => changeHospitalContent(hospital)}
                           className="rounded shadow-sm w-80 h-40 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 hover:shadow-lg hover:cursor-pointer ">
-                          <div className="text-center">
+                          <div id='pdf-all' className="text-center">
                             <ReactMarkdown className="font-bold text-xl mt-4 mb-4 text-gray-900">
                               {hospital.data.name}
                             </ReactMarkdown>
@@ -285,12 +286,13 @@ function HospitalSearch() {
                     );
                   })}
                   <div>
+                    <ExportAllHospitals />
                     <button><CSVLink
                       ref={csvLinkRef}
                       headers={csvReport.headers}
                       data={data1}
                     >Export hospital details to CSV file</CSVLink></button>
-                    <button>Share hospitals</button>
+                    <ShareHospitals />
                   </div>
                 </>
                 :
