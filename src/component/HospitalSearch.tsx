@@ -38,30 +38,35 @@ function HospitalSearch() {
     key: string;
   }[] = [
       { label: "Name", key: 'name' },
-      { label: "Region", key: "region" },
+      { label: "District", key: "district" },
       { label: "Town", key: "town" },
       { label: "Location", key: "location" },
       { label: "Opening Time", key: "openTime" },
       { label: "Phone Number", key: "phoneNo" },
+      { label: "Website", key: "website" },
     ];
   const name = popupContent.map((popup: any) => popup.data.name);
-  const region = popupContent.map((popup: any) => popup.data.region);
+  const district = popupContent.map((popup: any) => popup.data.district);
   const town = popupContent.map((popup: any) => popup.data.town);
   const location = popupContent.map((popup: any) => popup.data.location);
   const openTime = popupContent.map((popup: any) => popup.data.openTime);
   const phoneNo = popupContent.map((popup: any) => popup.data.phoneNo);
-
-
-  const hospitalName = hospitals.map((hospital: any) => hospital.data.name);
+  const website = popupContent.map((popup: any) => popup.data.website);
 
   const data = [
-    { name: name, region: region, town, location, openTime, phoneNo },
-    // { details: "3", info: "what" }
+    { name: name, district: district, town, location, openTime, phoneNo, website },
   ];
 
-  const data1 = [
-    { name: hospitalName },
-    // { details: "3", info: "what" }
+  const csvData = [
+    ["Name", "district", "town", "location", "phoneNo", "Website"],
+    ...hospitals.map((hospital) => [
+      hospital.data.name,
+      hospital.data.district,
+      hospital.data.town,
+      hospital.data.location,
+      hospital.data.phoneNo,
+      hospital.data.website,
+    ]),
   ];
 
   const csvReport = {
@@ -137,7 +142,7 @@ function HospitalSearch() {
           id: doc.id
         }))
         const result = hosp.filter((hosp: any) => {
-          return hosp.data.region.toLowerCase() === searchInputReg.toLowerCase();
+          return hosp.data.district.toLowerCase() === searchInputReg.toLowerCase();
         });
         console.log(result)
         setHospitals(result)
@@ -172,7 +177,7 @@ function HospitalSearch() {
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <Menu.Button className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 lg:px-16 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
-                Select_Region
+                Select_Distict
                 <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
               </Menu.Button>
             </div>
@@ -192,13 +197,13 @@ function HospitalSearch() {
                     {({ active }) => (
                       <button
                         onClick={handleMenuChange}
-                        value="greater accra"
+                        value="Accra Metropolis"
                         className={classNames(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                           'group flex items-center px-4 py-2 text-sm'
                         )}
                       >
-                        Greater Accra
+                        Accra Metropolis
                       </button>
                     )}
                   </Menu.Item>
@@ -206,16 +211,241 @@ function HospitalSearch() {
                     {({ active }) => (
                       <button
                         onClick={handleMenuChange}
-                        value="eastern region"
+                        value="Tema Metropolitan"
                         className={classNames(
                           active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                           'group flex items-center px-4 py-2 text-sm'
                         )}
                       >
-                        Eastern Region
+                        Tema Metropolitan
                       </button>
                     )}
                   </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Shai Osudoku District"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Shai Osudoku District
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ada West District"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ada West District
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Kpone Katamanso"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Kpone Katamanso
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Adenta Municipal District"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Adenta Municipal District
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ablekuma West Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ablekuma West Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ablekuma North Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ablekuma North Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ayawaso North Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ayawaso North Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ayawaso West Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ayawaso West Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ga West Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ga West Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Central"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Central
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ga Central Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ga Central Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ningo Prampram District"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ningo Prampram District
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="La Nkwantanang Madina Municipal District"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        La Nkwantanang Madina Municipal District
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ada"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ada
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Ayawaso East Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Ayawaso East Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={handleMenuChange}
+                        value="Krowor Municipal"
+                        className={classNames(
+                          active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                          'group flex items-center px-4 py-2 text-sm'
+                        )}
+                      >
+                        Krowor Municipal
+                      </button>
+                    )}
+                  </Menu.Item>
+
 
                 </div>
               </Menu.Items>
@@ -285,13 +515,13 @@ function HospitalSearch() {
                       </div>
                     );
                   })}
-                  <div>
-                    <ExportAllHospitals />
-                    <button><CSVLink
-                      ref={csvLinkRef}
-                      headers={csvReport.headers}
-                      data={data1}
-                    >Export hospital details to CSV file</CSVLink></button>
+                  <div className='lg:flex justify-between'>
+                    <ExportHospitals />
+                    <CSVLink
+                      className="-mx-3 bg-gray-400 my-4 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800 text-center"
+                      filename="my-file.csv"
+                      data={csvData}
+                    >Export to CSV</CSVLink>
                     <ShareHospitals />
                   </div>
                 </>
@@ -313,7 +543,7 @@ function HospitalSearch() {
               <div key={pop.id}>
                 <div id="pdf">
                   <p>Name: {pop.data.name}</p>
-                  <p>Region: {pop.data.region}</p>
+                  <p>District: {pop.data.district}</p>
                   <p>Town / City: {pop.data.town}</p>
                   <p>Location: {pop.data.location}</p>
                   <p>Opening Time: {pop.data.openTime}</p>
