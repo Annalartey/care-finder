@@ -12,7 +12,6 @@ import { db } from "../lib/init-firebase"
 import HospitalSearchHeader from "./HospitalSearchHeader"
 import useAuth from "../hooks/useAuth"
 import ExportHospitals from './ExportHospitals';
-import ExportAllHospitals from './ExportAllHospitals';
 import ShareHospitals from './ShareHospitals';
 import { CSVLink } from "react-csv";
 
@@ -497,7 +496,7 @@ function HospitalSearch() {
                         data-aos="fade-right"
                         data-aos-delay="100"
                       >
-                        <div
+                        <div id='pdf-all'
                           onClick={() => changeHospitalContent(hospital)}
                           className="rounded shadow-sm w-80 h-40 pb-8 bg-white mx-auto md:mr-auto md:ml-o md:mx-0 hover:shadow-lg hover:cursor-pointer ">
                           <div id='pdf-all' className="text-center">
@@ -516,7 +515,6 @@ function HospitalSearch() {
                     );
                   })}
                   <div className='lg:flex justify-between'>
-                    <ExportHospitals />
                     <CSVLink
                       className="-mx-3 bg-gray-400 my-4 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800 text-center"
                       filename="my-file.csv"

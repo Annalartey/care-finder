@@ -4,10 +4,12 @@ import { getAuth } from "firebase/auth";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+
   onAuthStateChanged,
   signOut,
   signInWithPopup,
   FacebookAuthProvider,
+  GoogleAuthProvider
 } from "firebase/auth";
 // import { auth } from '../lib/init-firebase'
 
@@ -33,11 +35,23 @@ const UserAuthContext = ({ children }: any) => {
       });
   };
 
+  //signin with facebook
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   //sign in  with email and password
   const handleAuthLogin = async (email: string, password: string) => {
     // debugger;
     try {
-      const user = await signInWithEmailAndPassword (
+      const user = await signInWithEmailAndPassword(
         auth,
         email,
         password
@@ -46,16 +60,16 @@ const UserAuthContext = ({ children }: any) => {
       console.log(user.user.email)
       localStorage.setItem("user", JSON.stringify(user));
       console.log("signed in");
-      }
-      catch (error: any) {
-        console.log(error.message);
-      };
+    }
+    catch (error: any) {
+      console.log(error.message);
+    };
   };
 
   //create a user with email and password
   const handleAuthRegister = async (email: string, password: string) => {
     try {
-      const user = await createUserWithEmailAndPassword (
+      const user = await createUserWithEmailAndPassword(
         auth,
         email,
         password
@@ -64,10 +78,10 @@ const UserAuthContext = ({ children }: any) => {
       console.log(user.user.email)
       localStorage.setItem("user", JSON.stringify(user));
       console.log("signed up");
-      }
-      catch (error: any) {
-        console.log(error.message);
-      };
+    }
+    catch (error: any) {
+      console.log(error.message);
+    };
   };
 
   //sign out
@@ -88,6 +102,7 @@ const UserAuthContext = ({ children }: any) => {
         user,
         handleAuthLogin,
         signInWithFacebook,
+        signInWithGoogle,
         handleAuthRegister,
         handleAuthLogout,
       }}

@@ -16,7 +16,7 @@ export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState<string>("")
   const [formValid, setFormValid] = useState<boolean>(false);
 
-  const { handleAuthLogin, signInWithFacebook } = useAuth();
+  const { handleAuthLogin, signInWithFacebook, signInWithGoogle } = useAuth();
 
   // const styles = {
   //   popup: {
@@ -57,6 +57,11 @@ export default function SignIn() {
   const handleFacebookLogin = (e: any) => {
     e.preventDefault();
     signInWithFacebook();
+  };
+
+  const handleGoogleLogin = (e: any) => {
+    e.preventDefault();
+    signInWithGoogle();
   };
 
   function validateForm() {
@@ -268,8 +273,8 @@ export default function SignIn() {
                     </span>
                   </button>
 
-                  <a
-                    href="/#"
+                  <button
+                    onClick={handleGoogleLogin}
                     className="flex w-full items-center justify-center gap-3 rounded-md bg-[rgb(13,255,0)] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]"
                   >
                     <svg
@@ -287,7 +292,7 @@ export default function SignIn() {
                     <span className="text-sm font-semibold leading-6">
                       Google
                     </span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

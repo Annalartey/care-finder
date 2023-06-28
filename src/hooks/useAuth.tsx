@@ -1,6 +1,6 @@
 // import * as React from 'react';
-import {useContext} from "react";
-import {Context} from "../context/UserAuthContext";
+import { useContext } from "react";
+import { Context } from "../context/UserAuthContext";
 
 
 const useAuth = () => {
@@ -8,6 +8,7 @@ const useAuth = () => {
     user,
     handleAuthLogin,
     signInWithFacebook,
+    signInWithGoogle,
     handleAuthRegister,
     handleAuthLogout,
   } = useContext(Context)
@@ -16,6 +17,7 @@ const useAuth = () => {
     user,
     handleAuthLogin,
     signInWithFacebook,
+    signInWithGoogle,
     handleAuthRegister,
     handleAuthLogout,
   }
