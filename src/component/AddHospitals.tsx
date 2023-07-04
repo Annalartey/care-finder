@@ -5,11 +5,11 @@ import { db } from "../lib/init-firebase"
 import { Link } from "react-router-dom";
 import logo from "./images/logo.png";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Helmet } from 'react-helmet-async';
+
 
 function AddHospitals() {
   const [hospitalName, setHospitalName] = useState("");
-  const [region, setRegion] = useState("");
+  const [district, setDistrict] = useState("");
   const [town, setTown] = useState("");
   const [location, setLocation] = useState("");
   const [openTime, setOpenTime] = useState("");
@@ -23,7 +23,7 @@ function AddHospitals() {
     try {
       const docRef = await addDoc(collection(db, "hospitals"), {
         name: hospitalName,
-        region: region,
+        district: district,
         town: town,
         location: location,
         openTime: openTime,
@@ -32,7 +32,7 @@ function AddHospitals() {
 
       });
       setHospitalName("")
-      setRegion("")
+      setDistrict("")
       setTown("")
       setLocation("")
       setOpenTime("")
@@ -48,10 +48,6 @@ function AddHospitals() {
 
   return (
     <>
-      <Helmet>
-        <title>Home</title>
-        <meta name="description" content="search for a hospital in Ghana" />
-      </Helmet>
       <div className="flex min-h-full h-screen flex-1">
         <div className="flex flex-1 flex-row justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -100,13 +96,13 @@ function AddHospitals() {
                 </label>
                 <div className="mt-2">
                   <input
-                    value={region}
-                    id="region"
-                    name="region"
-                    placeholder="Hospital Region..."
+                    value={district}
+                    id="district"
+                    name="district"
+                    placeholder="Hospital District..."
                     autoComplete=""
                     onChange={(e) => {
-                      setRegion(e.target.value);
+                      setDistrict(e.target.value);
                     }}
                     required
                     className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -228,53 +224,6 @@ function AddHospitals() {
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >Add</button>
             </form>
-          </div>
-          <div>
-            <div>
-              <VisibilityIcon />
-              PREVIEW
-            </div>
-            <div className="flex">
-              <p>Name:</p>
-              <ReactMarkdown children={hospitalName}
-              />
-            </div>
-            <div className="flex">
-              <ReactMarkdown> Region: </ReactMarkdown>
-              <ReactMarkdown
-                children={region}
-              />
-            </div>
-            <div className="flex">
-              <ReactMarkdown> City /Town: </ReactMarkdown>
-              <ReactMarkdown
-                children={town}
-              />
-            </div>
-            <div className="flex">
-              <ReactMarkdown> Location: </ReactMarkdown>
-              <ReactMarkdown
-                children={location}
-              />
-            </div>
-            <div className="flex">
-              <ReactMarkdown> Opening Time: </ReactMarkdown>
-              <ReactMarkdown
-                children={openTime}
-              />
-            </div>
-            <div className="flex">
-              <ReactMarkdown> Phone Number: </ReactMarkdown>
-              <ReactMarkdown
-                children={phoneNo}
-              />
-            </div>
-            <div className="flex">
-              <ReactMarkdown> Hospital's Website: </ReactMarkdown>
-              <ReactMarkdown
-                children={website}
-              />
-            </div>
           </div>
         </div>
         <div className="relative hidden w-0 flex-1 lg:block">
