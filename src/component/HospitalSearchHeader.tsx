@@ -57,13 +57,13 @@ function Header() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             {user ?
               <div className="flex py-6">
+                <Link to="/add-hospital"><button>Add Hospital</button></Link>
                 <p>signed in as {user.email}</p>
                 <button
                   onClick={handleLogout}
                   className="text-sm font-semibold leading-6 text-black">
                   Log out <span aria-hidden="true">&rarr;</span>
                 </button>
-                <Link to="/add-hospital"><button>Add Hospital</button></Link>
               </div>
               :
               <div className="py-6">
